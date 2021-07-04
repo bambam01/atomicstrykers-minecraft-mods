@@ -122,15 +122,15 @@ public class CustomRotationMapping
                     int dir = 0;
                     if (val[0].equals("EAST"))
                     {
-                        dir = RuinsMod.DIR_EAST;
+                        dir = NewRuinsMod.DIR_EAST;
                     }
                     else if (val[0].equals("SOUTH"))
                     {
-                        dir = RuinsMod.DIR_SOUTH;
+                        dir = NewRuinsMod.DIR_SOUTH;
                     }
                     else if (val[0].equals("WEST"))
                     {
-                        dir = RuinsMod.DIR_WEST;
+                        dir = NewRuinsMod.DIR_WEST;
                     }
 
                     int metadata = Integer.parseInt(val[1]);

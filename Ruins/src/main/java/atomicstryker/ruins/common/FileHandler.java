@@ -53,7 +53,7 @@ public class FileHandler
         public void run()
         {
             // create the vars array fitting to the number of Biomes present
-            int biomeAmountPlusOne = RuinsMod.BIOME_NONE + 1;
+            int biomeAmountPlusOne = NewRuinsMod.BIOME_NONE + 1;
             vars = new int[3][biomeAmountPlusOne];
             for (int j = 0; j < vars[0].length; j++)
             {
@@ -70,7 +70,7 @@ public class FileHandler
             File basedir = null;
             try
             {
-                basedir = new File(RuinsMod.getMinecraftBaseDir(), "mods");
+                basedir = new File(NewRuinsMod.getMinecraftBaseDir(), "mods");
             }
             catch (Exception e)
             {
@@ -113,9 +113,9 @@ public class FileHandler
             {
                 // load in the generic templates
                 // pw.println("Loading the generic ruins templates...");
-                addRuins(pw, new File(templPath, "generic"), RuinsMod.BIOME_NONE);
-                vars[COUNT][RuinsMod.BIOME_NONE] = templates.get(RuinsMod.BIOME_NONE).size();
-                recalcBiomeWeight(RuinsMod.BIOME_NONE);
+                addRuins(pw, new File(templPath, "generic"), NewRuinsMod.BIOME_NONE);
+                vars[COUNT][NewRuinsMod.BIOME_NONE] = templates.get(NewRuinsMod.BIOME_NONE).size();
+                recalcBiomeWeight(NewRuinsMod.BIOME_NONE);
             }
             catch (Exception e)
             {
@@ -209,7 +209,7 @@ public class FileHandler
 
     public boolean useGeneric(Random random, int biome)
     {
-        return biome == RuinsMod.BIOME_NONE || random.nextInt(100) + 1 >= vars[CHANCE][biome];
+        return biome == NewRuinsMod.BIOME_NONE || random.nextInt(100) + 1 >= vars[CHANCE][biome];
     }
 
     public void removeTemplate(String name, int biome)
@@ -488,7 +488,7 @@ public class FileHandler
         {
             return;
         }
-        File modsdir = new File(RuinsMod.getMinecraftBaseDir(), "mods");
+        File modsdir = new File(NewRuinsMod.getMinecraftBaseDir(), "mods");
         File basefile = new File(modsdir, "ruins.txt");
         if (!basefile.exists())
         {

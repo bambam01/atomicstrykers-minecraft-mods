@@ -417,7 +417,7 @@ public class RuinTemplateRule
 
     private void placeBlock(World world, int blocknum, int x, int y, int z, int rotate)
     {
-        int metadata = rotate != RuinsMod.DIR_NORTH ? rotateMetadata(blockIDs[blocknum], blockMDs[blocknum], rotate) : blockMDs[blocknum];
+        int metadata = rotate != NewRuinsMod.DIR_NORTH ? rotateMetadata(blockIDs[blocknum], blockMDs[blocknum], rotate) : blockMDs[blocknum];
         world.setBlock(x, y, z, blockIDs[blocknum], metadata, 2);
         world.setBlockMetadataWithNotify(x, y, z, metadata, 2);
         
@@ -599,7 +599,7 @@ public class RuinTemplateRule
         {
             String[] splits = dataString.split(":");
             int meta = blockMDs[blocknum];
-            if (rotate != RuinsMod.DIR_NORTH)
+            if (rotate != NewRuinsMod.DIR_NORTH)
             {
                 meta = rotateMetadata(Blocks.standing_sign, blockMDs[blocknum], rotate);
             }
@@ -617,7 +617,7 @@ public class RuinTemplateRule
         {
             String[] splits = dataString.split(":");
             int meta = blockMDs[blocknum];
-            if (rotate != RuinsMod.DIR_NORTH)
+            if (rotate != NewRuinsMod.DIR_NORTH)
             {
                 meta = rotateMetadata(Blocks.wall_sign, blockMDs[blocknum], rotate);
             }
@@ -1046,7 +1046,7 @@ public class RuinTemplateRule
 
     private String findAndRotateRelativeCommandBlockCoords(String command, int rotate)
     {
-        if (rotate != RuinsMod.DIR_NORTH)
+        if (rotate != NewRuinsMod.DIR_NORTH)
         {
             if (excessiveDebugging)
             {
@@ -1063,13 +1063,13 @@ public class RuinTemplateRule
                 {
                     debugPrinter.println("Found contained coordinate triple: "+coordinateMatcher.group());
                 }
-                if (rotate == RuinsMod.DIR_EAST)
+                if (rotate == NewRuinsMod.DIR_EAST)
                 {
                     // z multiplied with -1 becomes x, x becomes z
                     coordinateMatcher.appendReplacement(stringBuffer, String.format("~%s %s ~%s",
                             (tryToInvert(coordinateMatcher.group(3))), coordinateMatcher.group(2), coordinateMatcher.group(1)));
                 }
-                else if (rotate == RuinsMod.DIR_WEST)
+                else if (rotate == NewRuinsMod.DIR_WEST)
                 {
                     // x multiplied with -1 becomes z, z becomes x
                     coordinateMatcher.appendReplacement(
@@ -1230,7 +1230,7 @@ public class RuinTemplateRule
             // minecart tracks
             switch (dir)
             {
-            case RuinsMod.DIR_EAST:
+            case NewRuinsMod.DIR_EAST:
                 // flat tracks
                 if (metadata == 0)
                 {
@@ -1274,7 +1274,7 @@ public class RuinTemplateRule
                 {
                     return 6;
                 }
-            case RuinsMod.DIR_SOUTH:
+            case NewRuinsMod.DIR_SOUTH:
                 // flat tracks
                 if (metadata == 0)
                 {
@@ -1318,7 +1318,7 @@ public class RuinTemplateRule
                 {
                     return 7;
                 }
-            case RuinsMod.DIR_WEST:
+            case NewRuinsMod.DIR_WEST:
                 // flat tracks
                 if (metadata == 0)
                 {
@@ -1381,7 +1381,7 @@ public class RuinTemplateRule
             }
             switch (dir)
             {
-            case RuinsMod.DIR_EAST:
+            case NewRuinsMod.DIR_EAST:
                 if (metadata == 0)
                 {
                     return 1 + tempdata;
@@ -1398,7 +1398,7 @@ public class RuinTemplateRule
                 {
                     return 0 + tempdata;
                 }
-            case RuinsMod.DIR_SOUTH:
+            case NewRuinsMod.DIR_SOUTH:
                 if (metadata == 0)
                 {
                     return 2 + tempdata;
@@ -1415,7 +1415,7 @@ public class RuinTemplateRule
                 {
                     return 1 + tempdata;
                 }
-            case RuinsMod.DIR_WEST:
+            case NewRuinsMod.DIR_WEST:
                 if (metadata == 0)
                 {
                     return 3 + tempdata;
@@ -1461,7 +1461,7 @@ public class RuinTemplateRule
             }
             switch (dir)
             {
-            case RuinsMod.DIR_EAST:
+            case NewRuinsMod.DIR_EAST:
                 if (metadata == 1)
                 {
                     return 3 + tempdata;
@@ -1478,7 +1478,7 @@ public class RuinTemplateRule
                 {
                     return 1 + tempdata;
                 }
-            case RuinsMod.DIR_SOUTH:
+            case NewRuinsMod.DIR_SOUTH:
                 if (metadata == 1)
                 {
                     return 2 + tempdata;
@@ -1495,7 +1495,7 @@ public class RuinTemplateRule
                 {
                     return 3 + tempdata;
                 }
-            case RuinsMod.DIR_WEST:
+            case NewRuinsMod.DIR_WEST:
                 if (metadata == 1)
                 {
                     return 4 + tempdata;
@@ -1522,7 +1522,7 @@ public class RuinTemplateRule
             // Vines
             switch (dir)
             {
-            case RuinsMod.DIR_EAST: // turn one right
+            case NewRuinsMod.DIR_EAST: // turn one right
                 if (metadata == 8)
                 {
                     return 1;
@@ -1539,7 +1539,7 @@ public class RuinTemplateRule
                 {
                     return 8;
                 }
-            case RuinsMod.DIR_SOUTH: // run 2 right
+            case NewRuinsMod.DIR_SOUTH: // run 2 right
                 if (metadata == 8)
                 {
                     return 2;
@@ -1556,7 +1556,7 @@ public class RuinTemplateRule
                 {
                     return 1;
                 }
-            case RuinsMod.DIR_WEST: // turn 1 left
+            case NewRuinsMod.DIR_WEST: // turn 1 left
                 if (metadata == 8)
                 {
                     return 4;
@@ -1582,7 +1582,7 @@ public class RuinTemplateRule
         {
             switch (dir)
             {
-            case RuinsMod.DIR_EAST:
+            case NewRuinsMod.DIR_EAST:
                 if (metadata == 0)
                 {
                     return 1 + tempdata;
@@ -1599,7 +1599,7 @@ public class RuinTemplateRule
                 {
                     return 0 + tempdata;
                 }
-            case RuinsMod.DIR_SOUTH:
+            case NewRuinsMod.DIR_SOUTH:
                 if (metadata == 0)
                 {
                     return 2 + tempdata;
@@ -1616,7 +1616,7 @@ public class RuinTemplateRule
                 {
                     return 1 + tempdata;
                 }
-            case RuinsMod.DIR_WEST:
+            case NewRuinsMod.DIR_WEST:
                 if (metadata == 0)
                 {
                     return 3 + tempdata;
@@ -1645,7 +1645,7 @@ public class RuinTemplateRule
             }
             switch (dir)
             {
-            case RuinsMod.DIR_EAST:
+            case NewRuinsMod.DIR_EAST:
                 if (metadata == 0)
                 {
                     return 1 + tempdata;
@@ -1662,7 +1662,7 @@ public class RuinTemplateRule
                 {
                     return 0 + tempdata;
                 }
-            case RuinsMod.DIR_SOUTH:
+            case NewRuinsMod.DIR_SOUTH:
                 if (metadata == 0)
                 {
                     return 2 + tempdata;
@@ -1679,7 +1679,7 @@ public class RuinTemplateRule
                 {
                     return 1 + tempdata;
                 }
-            case RuinsMod.DIR_WEST:
+            case NewRuinsMod.DIR_WEST:
                 if (metadata == 0)
                 {
                     return 3 + tempdata;
@@ -1702,7 +1702,7 @@ public class RuinTemplateRule
         {
             switch (dir)
             {
-            case RuinsMod.DIR_EAST:
+            case NewRuinsMod.DIR_EAST:
                 if (metadata == 0)
                 {
                     return 4;
@@ -1767,7 +1767,7 @@ public class RuinTemplateRule
                 {
                     return 3;
                 }
-            case RuinsMod.DIR_SOUTH:
+            case NewRuinsMod.DIR_SOUTH:
                 if (metadata == 0)
                 {
                     return 8;
@@ -1832,7 +1832,7 @@ public class RuinTemplateRule
                 {
                     return 7;
                 }
-            case RuinsMod.DIR_WEST:
+            case NewRuinsMod.DIR_WEST:
                 if (metadata == 0)
                 {
                     return 12;
@@ -1910,7 +1910,7 @@ public class RuinTemplateRule
             
             switch (dir)
             {
-            case RuinsMod.DIR_EAST:
+            case NewRuinsMod.DIR_EAST:
                 if (rotbits == 0)
                 {
                     return 1 | databits;
@@ -1927,7 +1927,7 @@ public class RuinTemplateRule
                 {
                     return 0 | databits;
                 }
-            case RuinsMod.DIR_SOUTH:
+            case NewRuinsMod.DIR_SOUTH:
                 if (rotbits == 0)
                 {
                     return 2 | databits;
@@ -1944,7 +1944,7 @@ public class RuinTemplateRule
                 {
                     return 1 | databits;
                 }
-            case RuinsMod.DIR_WEST:
+            case NewRuinsMod.DIR_WEST:
                 if (rotbits == 0)
                 {
                     return 3 | databits;
@@ -1974,7 +1974,7 @@ public class RuinTemplateRule
             
             switch (dir)
             {
-            case RuinsMod.DIR_EAST:
+            case NewRuinsMod.DIR_EAST:
                 if (rotbits == 1)
                 {
                     return 2 | databits;
@@ -1991,7 +1991,7 @@ public class RuinTemplateRule
                 {
                     return 1 | databits;
                 }
-            case RuinsMod.DIR_SOUTH:
+            case NewRuinsMod.DIR_SOUTH:
                 if (rotbits == 1)
                 {
                     return 0 | databits;
@@ -2008,7 +2008,7 @@ public class RuinTemplateRule
                 {
                     return 2 | databits;
                 }
-            case RuinsMod.DIR_WEST:
+            case NewRuinsMod.DIR_WEST:
                 if (rotbits == 1)
                 {
                     return 3 | databits;
@@ -2038,7 +2038,7 @@ public class RuinTemplateRule
             
             switch (dir)
             {
-            case RuinsMod.DIR_EAST:
+            case NewRuinsMod.DIR_EAST:
                 if (rotbits == 2)
                 {
                     return 3 | databits;
@@ -2055,7 +2055,7 @@ public class RuinTemplateRule
                 {
                     return 2 | databits;
                 }
-            case RuinsMod.DIR_SOUTH:
+            case NewRuinsMod.DIR_SOUTH:
                 if (rotbits == 2)
                 {
                     return 0 | databits;
@@ -2072,7 +2072,7 @@ public class RuinTemplateRule
                 {
                     return 3 | databits;
                 }
-            case RuinsMod.DIR_WEST:
+            case NewRuinsMod.DIR_WEST:
                 if (rotbits == 2)
                 {
                     return 1 | databits;
@@ -2102,7 +2102,7 @@ public class RuinTemplateRule
             
             switch (dir)
             {
-            case RuinsMod.DIR_EAST:
+            case NewRuinsMod.DIR_EAST:
                 if (rotbits == 0)
                 {
                     return 1 | databits;
@@ -2119,7 +2119,7 @@ public class RuinTemplateRule
                 {
                     return 0 | databits;
                 }
-            case RuinsMod.DIR_SOUTH:
+            case NewRuinsMod.DIR_SOUTH:
                 if (rotbits == 0)
                 {
                     return 2 | databits;
@@ -2136,7 +2136,7 @@ public class RuinTemplateRule
                 {
                     return 1 | databits;
                 }
-            case RuinsMod.DIR_WEST:
+            case NewRuinsMod.DIR_WEST:
                 if (rotbits == 0)
                 {
                     return 3 | databits;
@@ -2165,8 +2165,8 @@ public class RuinTemplateRule
             
             switch (dir)
             {
-            case RuinsMod.DIR_EAST:
-            case RuinsMod.DIR_WEST:
+            case NewRuinsMod.DIR_EAST:
+            case NewRuinsMod.DIR_WEST:
                 if (rotbits == 0)
                 {
                     return 1 | databits;
@@ -2191,8 +2191,8 @@ public class RuinTemplateRule
             
             switch (dir)
             {
-            case RuinsMod.DIR_EAST:
-            case RuinsMod.DIR_WEST:
+            case NewRuinsMod.DIR_EAST:
+            case NewRuinsMod.DIR_WEST:
                 if (rot == 1)
                 {
                     // go from N/S to E/W

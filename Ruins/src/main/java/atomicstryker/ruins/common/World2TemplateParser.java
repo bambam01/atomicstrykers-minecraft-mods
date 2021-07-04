@@ -162,7 +162,7 @@ public class World2TemplateParser extends Thread
             player.addChatMessage(new ChatComponentText("Block reading finished. Rules: " + usedBlocks.size() + ", layers: " + layerData.size()
                     + ", xlen: " + xLength + ", zlen: " + zLength));
 
-            File templateFile = new File(RuinsMod.getMinecraftBaseDir(), "mods/resources/ruins/templateparser/" + fileName + ".tml");
+            File templateFile = new File(NewRuinsMod.getMinecraftBaseDir(), "mods/resources/ruins/templateparser/" + fileName + ".tml");
             toFile(templateFile);
 
             if (!failed)
@@ -414,7 +414,7 @@ public class World2TemplateParser extends Thread
             PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(file)));
             
             pw.println();
-            pw.println("# Created by Ruins mod version "+RuinsMod.modversion+" Ingame Parser");
+            pw.println("# Created by Ruins mod version "+ NewRuinsMod.modversion+" Ingame Parser");
             pw.println("# authoring Player: "+player.getCommandSenderName());
             pw.println();
             

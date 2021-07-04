@@ -195,14 +195,14 @@ public class RuinGenerator
 
         if (fileHandler.useGeneric(random, biomeID))
         {
-            biomeID = RuinsMod.BIOME_NONE;
+            biomeID = NewRuinsMod.BIOME_NONE;
         }
         stats.biomes[biomeID]++;
         
         RuinTemplate ruinTemplate = fileHandler.getTemplate(random, biomeID);
         if (ruinTemplate == null)
         {
-            biomeID = RuinsMod.BIOME_NONE;
+            biomeID = NewRuinsMod.BIOME_NONE;
             ruinTemplate = fileHandler.getTemplate(random, biomeID);
 
             if (ruinTemplate == null)
@@ -278,14 +278,14 @@ public class RuinGenerator
             System.out.println("    No Leveling:                 " + stats.LevelingFails);
             System.out.println("    No Cut-In:                   " + stats.CutInFails);
 
-            for (int i = 0; i < RuinsMod.BIOME_NONE; i++)
+            for (int i = 0; i < NewRuinsMod.BIOME_NONE; i++)
             {
                 if (stats.biomes[i] != 0)
                 {
                     System.out.println(BiomeGenBase.getBiomeGenArray()[i].biomeName + ": " + stats.biomes[i] + " Biome building attempts");
                 }
             }
-            System.out.println("Any-Biome: " + stats.biomes[RuinsMod.BIOME_NONE] + " building attempts");
+            System.out.println("Any-Biome: " + stats.biomes[NewRuinsMod.BIOME_NONE] + " building attempts");
             
             System.out.println();
         }

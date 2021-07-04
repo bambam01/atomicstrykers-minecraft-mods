@@ -9,7 +9,6 @@ import net.minecraft.command.ICommand;
 import net.minecraft.command.ICommandSender;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.ChatComponentText;
-import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
 
 public class CommandTestTemplate extends CommandBase
@@ -49,7 +48,7 @@ public class CommandTestTemplate extends CommandBase
             {
                 if (parsedRuin != null)
                 {
-                    parsedRuin.doBuild(sender.getEntityWorld(), sender.getEntityWorld().rand, xpos, ypos-1, zpos, RuinsMod.DIR_NORTH);
+                    parsedRuin.doBuild(sender.getEntityWorld(), sender.getEntityWorld().rand, xpos, ypos-1, zpos, NewRuinsMod.DIR_NORTH);
                     parsedRuin = null;
                 }
                 else
@@ -89,13 +88,13 @@ public class CommandTestTemplate extends CommandBase
             target = "templateparser/" + target;
         }
 
-        File file = new File(RuinsMod.getMinecraftBaseDir(), "mods/resources/ruins/" + target + ".tml");
+        File file = new File(NewRuinsMod.getMinecraftBaseDir(), "mods/resources/ruins/" + target + ".tml");
         if (file.exists() && file.canWrite())
         {
             try
             {
                 parsedRuin = new RuinTemplate(new PrintWriter(System.out, true), file.getCanonicalPath(), file.getName(), true);
-                int rotation = (args.length > 4) ? Integer.parseInt(args[4]) : RuinsMod.DIR_NORTH;
+                int rotation = (args.length > 4) ? Integer.parseInt(args[4]) : NewRuinsMod.DIR_NORTH;
                 
                 if (parsedRuin != null)
                 {

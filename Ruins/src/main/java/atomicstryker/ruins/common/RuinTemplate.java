@@ -208,10 +208,10 @@ public class RuinTemplate
         // override rotation wishes if its locked by template
         if (preventRotation)
         {
-            rotate = RuinsMod.DIR_NORTH;
+            rotate = NewRuinsMod.DIR_NORTH;
         }
         // how are we oriented?
-        else if (rotate == RuinsMod.DIR_EAST || rotate == RuinsMod.DIR_WEST)
+        else if (rotate == NewRuinsMod.DIR_EAST || rotate == NewRuinsMod.DIR_WEST)
         {
             // reorient for east/west rotation
             x = xBase + l_off;
@@ -314,7 +314,7 @@ public class RuinTemplate
     {
         int add = lbuffer;
         int xMin = 0, xMax = 0, zMin = 0, zMax = 0;
-        if ((rotate == RuinsMod.DIR_EAST) || (rotate == RuinsMod.DIR_WEST))
+        if ((rotate == NewRuinsMod.DIR_EAST) || (rotate == NewRuinsMod.DIR_WEST))
         {
             xMin = x + l_off - add;
             xMax = xMin + length + add;
@@ -374,10 +374,10 @@ public class RuinTemplate
         // override rotation wishes if its locked by template
         if (preventRotation)
         {
-            rotate = RuinsMod.DIR_NORTH;
+            rotate = NewRuinsMod.DIR_NORTH;
         }
 
-        if ((rotate == RuinsMod.DIR_EAST) || (rotate == RuinsMod.DIR_WEST))
+        if ((rotate == NewRuinsMod.DIR_EAST) || (rotate == NewRuinsMod.DIR_WEST))
         {
             eastwest = true;
             x = xBase + l_off;
@@ -411,13 +411,13 @@ public class RuinTemplate
                 {
                     switch (rotate)
                     {
-                    case RuinsMod.DIR_EAST:
+                    case NewRuinsMod.DIR_EAST:
                         rulenum = curlayer.getRuleAt(z1, xDim - (x1 + 1));
                         break;
-                    case RuinsMod.DIR_SOUTH:
+                    case NewRuinsMod.DIR_SOUTH:
                         rulenum = curlayer.getRuleAt(xDim - (x1 + 1), zDim - (z1 + 1));
                         break;
-                    case RuinsMod.DIR_WEST:
+                    case NewRuinsMod.DIR_WEST:
                         rulenum = curlayer.getRuleAt(zDim - (z1 + 1), x1);
                         break;
                     default:
@@ -773,7 +773,7 @@ public class RuinTemplate
                     // syntax: adjoining_template=<template>;<relativeX>;<allowedYdifference>;<relativeZ>[;<spawnchance>]
                     String[] vals = line.split("=")[1].split(";");
                     
-                    File file = new File(RuinsMod.getMinecraftBaseDir(), "mods/resources/ruins/" + vals[0] + ".tml");
+                    File file = new File(NewRuinsMod.getMinecraftBaseDir(), "mods/resources/ruins/" + vals[0] + ".tml");
                     if (file.exists() && file.canRead())
                     {
                         RuinTemplate adjTempl = new RuinTemplate(debugPrinter, file.getCanonicalPath(), file.getName(), false);
