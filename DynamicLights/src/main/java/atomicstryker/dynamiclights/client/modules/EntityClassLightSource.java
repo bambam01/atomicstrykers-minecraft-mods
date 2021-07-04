@@ -19,6 +19,7 @@ import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.TickEvent;
+import org.apache.commons.lang3.ArrayUtils;
 
 /**
  * 
@@ -37,7 +38,9 @@ public class EntityClassLightSource
     private ArrayList<EntityLightAdapter> trackedItems;
     private Thread thread;
     private boolean threadRunning;
-    
+    private int[] disabledDimensions;
+
+
     private Configuration config;
     private HashMap<Class<? extends Entity>, Integer> lightValueMap;
     
@@ -52,6 +55,10 @@ public class EntityClassLightSource
         Property updateI = config.get(Configuration.CATEGORY_GENERAL, "update Interval", 1000);
         updateI.comment = "Update Interval time for all Entities in milliseconds. The lower the better and costlier.";
         updateInterval = updateI.getInt();
+
+        Property disabledDimensionIds = config.get(Configuration.CATEGORY_GENERAL, "disabled dimension ids",new int[] {-100});
+        disabledDimensionIds.comment = "list of dimensions ids that are disabled";
+        disabledDimensions = disabledDimensionIds.getIntList();
         
         config.save();
         
@@ -127,7 +134,7 @@ public class EntityClassLightSource
             {
                 light = getLightFromEntity(ent);
                 // Loop all loaded Entities, find alive and valid ItemEntities
-                if (light > 0)
+                if (light > 0 && ArrayUtils.contains(disabledDimensions, ent.dimension))
                 {
                     // now find them in the already tracked item adapters
                     boolean found = false;

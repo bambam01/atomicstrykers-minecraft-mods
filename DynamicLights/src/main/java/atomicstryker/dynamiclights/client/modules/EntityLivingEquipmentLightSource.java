@@ -25,6 +25,7 @@ import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.TickEvent;
+import org.apache.commons.lang3.ArrayUtils;
 
 /**
  * 
@@ -45,11 +46,20 @@ public class EntityLivingEquipmentLightSource
     private boolean threadRunning;
     private ItemConfigHelper itemsMap;
     private Configuration config;
-    
+
+    private int[] disabledDimensions;
+
+
     @EventHandler
     public void preInit(FMLPreInitializationEvent evt)
     {
-        config = new Configuration(evt.getSuggestedConfigurationFile());        
+        config = new Configuration(evt.getSuggestedConfigurationFile());
+        config.load();
+        Property disabledDimensionIds = config.get(Configuration.CATEGORY_GENERAL, "disabled dimension ids",new int[] {-100});
+        disabledDimensionIds.comment = "list of dimensions ids that are disabled";
+        disabledDimensions = disabledDimensionIds.getIntList();
+
+        config.save();
         FMLCommonHandler.instance().bus().register(this);
     }
     
@@ -153,7 +163,7 @@ public class EntityLivingEquipmentLightSource
                 ent = (Entity) o;
                 // Loop all loaded Entities, find alive and valid EntityLiving not otherwise handled
                 if ((ent instanceof EntityLivingBase)
-                        && ent.isEntityAlive() && !(ent instanceof EntityPlayer) && getEquipmentLightLevel((EntityLivingBase) ent) > 0)
+                        && ent.isEntityAlive() && !(ent instanceof EntityPlayer) && getEquipmentLightLevel((EntityLivingBase) ent) > 0 && !ArrayUtils.contains(disabledDimensions, ent.dimension))
                 {
                     // now find them in the already tracked adapters
                     boolean found = false;

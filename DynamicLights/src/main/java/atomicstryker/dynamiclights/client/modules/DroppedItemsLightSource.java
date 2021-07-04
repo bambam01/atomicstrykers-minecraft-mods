@@ -24,6 +24,7 @@ import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.TickEvent;
 import cpw.mods.fml.common.registry.GameData;
+import org.apache.commons.lang3.ArrayUtils;
 
 /**
  * 
@@ -46,11 +47,20 @@ public class DroppedItemsLightSource
     
     private ItemConfigHelper itemsMap;
     private ItemConfigHelper notWaterProofItems;
-    
+
+    private int[] disabledDimensions;
+
+
     @EventHandler
     public void preInit(FMLPreInitializationEvent evt)
     {
         config = new Configuration(evt.getSuggestedConfigurationFile());
+        config.load();
+        Property disabledDimensionIds = config.get(Configuration.CATEGORY_GENERAL, "disabled dimension ids",new int[] {-100});
+        disabledDimensionIds.comment = "list of dimensions ids that are disabled";
+        disabledDimensions = disabledDimensionIds.getIntList();
+
+        config.save();
         FMLCommonHandler.instance().bus().register(this);
     }
     
@@ -120,7 +130,7 @@ public class DroppedItemsLightSource
             {
                 ent = (Entity) o;
                 // Loop all loaded Entities, find alive and valid ItemEntities
-                if (ent instanceof EntityItem && ent.isEntityAlive())
+                if (ent instanceof EntityItem && ent.isEntityAlive() && !ArrayUtils.contains(disabledDimensions, ent.dimension))
                 {
                     // now find them in the already tracked item adapters
                     boolean found = false;

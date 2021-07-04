@@ -24,6 +24,7 @@ import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.TickEvent;
+import org.apache.commons.lang3.ArrayUtils;
 
 /**
  * 
@@ -44,6 +45,7 @@ public class BurningEntitiesLightSource
     private boolean threadRunning;
     private Configuration config;
     private HashMap<Class<? extends Entity>, Integer> lightValueMap;
+    private int[] disabledDimensions;
     
     @EventHandler
     public void preInit(FMLPreInitializationEvent evt)
@@ -55,6 +57,10 @@ public class BurningEntitiesLightSource
         Property updateI = config.get(Configuration.CATEGORY_GENERAL, "update Interval", 1000);
         updateI.comment = "Update Interval time for all burning EntityLiving, Arrows and Fireballs in milliseconds. The lower the better and costlier.";
         updateInterval = updateI.getInt();
+
+        Property disabledDimensionIds = config.get(Configuration.CATEGORY_GENERAL, "disabled dimension ids",new int[] {-100});
+        disabledDimensionIds.comment = "list of dimensions ids that are disabled";
+        disabledDimensions = disabledDimensionIds.getIntList();
         
         config.save();
         
@@ -108,7 +114,7 @@ public class BurningEntitiesLightSource
                 ent = (Entity) o;
                 // Loop all loaded Entities, find alive and valid EntityLiving not otherwise handled
                 if ((ent instanceof EntityLivingBase || ent instanceof EntityFireball || ent instanceof EntityArrow)
-                        && ent.isEntityAlive() && ent.isBurning() && !(ent instanceof EntityItem) && !(ent instanceof EntityPlayer))
+                    && ent.isEntityAlive() && ent.isBurning() && !(ent instanceof EntityPlayer) && !ArrayUtils.contains(disabledDimensions, ent.dimension))
                 {
                     boolean shouldLight = false;
                     if (!lightValueMap.containsKey(ent.getClass()))

@@ -1,8 +1,12 @@
 package atomicstryker.dynamiclights.client.modules;
 
+import cpw.mods.fml.common.FMLCommonHandler;
+import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.monster.EntityCreeper;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.common.config.Configuration;
+import net.minecraftforge.common.config.Property;
 import net.minecraftforge.event.entity.PlaySoundAtEntityEvent;
 import atomicstryker.dynamiclights.client.DynamicLights;
 import atomicstryker.dynamiclights.client.IDynamicLightSource;
@@ -10,6 +14,9 @@ import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
+import org.apache.commons.lang3.ArrayUtils;
+
+import java.util.HashMap;
 
 /**
  * 
@@ -23,6 +30,27 @@ import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 public class ChargingCreeperLightSource
 {
 
+    private int[] disabledDimensions;
+
+
+
+    @EventHandler
+    public void preInit(FMLPreInitializationEvent evt)
+    {
+
+        Configuration config = new Configuration(evt.getSuggestedConfigurationFile());
+        config.load();
+
+
+        Property disabledDimensionIds = config.get(Configuration.CATEGORY_GENERAL, "disabled dimension ids",new int[] {-100});
+        disabledDimensionIds.comment = "list of dimensions ids that are disabled";
+        disabledDimensions = disabledDimensionIds.getIntList();
+
+        config.save();
+
+    }
+
+
     @EventHandler
     public void load(FMLInitializationEvent evt)
     {
@@ -34,7 +62,7 @@ public class ChargingCreeperLightSource
     {
         if (event.name != null && event.name.equals("random.fuse") && event.entity != null && event.entity instanceof EntityCreeper)
         {
-            if (event.entity.isEntityAlive())
+            if (event.entity.isEntityAlive() && !ArrayUtils.contains(disabledDimensions, event.entity.dimension))
             {
                 DynamicLights.addLightSource(new EntityLightAdapter((EntityCreeper) event.entity));
             }

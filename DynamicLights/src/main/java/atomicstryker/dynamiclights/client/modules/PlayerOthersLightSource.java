@@ -23,6 +23,7 @@ import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.TickEvent;
+import org.apache.commons.lang3.ArrayUtils;
 
 /**
  * 
@@ -44,11 +45,21 @@ public class PlayerOthersLightSource
     
     private ItemConfigHelper itemsMap;
     private Configuration config;
+
+    private int[] disabledDimensions;
     
     @EventHandler
     public void preInit(FMLPreInitializationEvent evt)
     {
-        config = new Configuration(evt.getSuggestedConfigurationFile());        
+        config = new Configuration(evt.getSuggestedConfigurationFile());
+        config.load();
+
+
+        Property disabledDimensionIds = config.get(Configuration.CATEGORY_GENERAL, "disabled dimension ids",new int[] {-100});
+        disabledDimensionIds.comment = "list of dimensions ids that are disabled";
+        disabledDimensions = disabledDimensionIds.getIntList();
+
+        config.save();
         FMLCommonHandler.instance().bus().register(this);
     }
     
@@ -114,7 +125,7 @@ public class PlayerOthersLightSource
             {
                 ent = (Entity) o;
                 // Loop all loaded Entities, find alive and valid other Player Entities
-                if (ent instanceof EntityOtherPlayerMP && ent.isEntityAlive())
+                if (ent instanceof EntityOtherPlayerMP && ent.isEntityAlive() && !ArrayUtils.contains(disabledDimensions, ent.dimension))
                 {
                     // now find them in the already tracked player adapters
                     boolean found = false;

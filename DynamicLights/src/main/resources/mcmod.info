@@ -6,7 +6,9 @@
   "mcversion": "${mcversion}",
   "url": "http://www.minecraftforum.net/topic/184426-",
   "authors": [
-    "AtomicStryker"
+    "AtomicStryker",
+	"bambam01",
+"bambam01"
   ],
   "credits": "",
   "logoFile": "assets/dynamiclights/textures/gui/logo.png"
@@ -15,7 +17,9 @@
   "name": "Dynamic Lights Burning Entity Module",
   "description": "Entities on Fire shine light. Disable to save minor performance.",
   "authors": [
-    "AtomicStryker"
+    "AtomicStryker",
+	"bambam01",
+"bambam01"
   ],
   "logoFile": "assets/dynamiclights/textures/gui/logo.png",
   "dependencies": [
@@ -26,7 +30,9 @@
   "name": "Dynamic Lights Creeper Module",
   "description": "Charging Creepers shine light. Disable to save minimal performance.",
   "authors": [
-    "AtomicStryker"
+    "AtomicStryker",
+	"bambam01",
+"bambam01"
   ],
   "logoFile": "assets/dynamiclights/textures/gui/logo.png",
   "dependencies": [
@@ -37,7 +43,9 @@
   "name": "Dynamic Lights EntityItem Module",
   "description": "Dropped Items can shine light. Disable to save major performance.",
   "authors": [
-    "AtomicStryker"
+    "AtomicStryker",
+	"bambam01",
+"bambam01"
   ],
   "logoFile": "assets/dynamiclights/textures/gui/logo.png",
   "dependencies": [
@@ -48,7 +56,9 @@
   "name": "Dynamic Lights Entity Light Module",
   "description": "Entire Entity classes shine light. Disable to save a lot of performance.",
   "authors": [
-    "AtomicStryker"
+    "AtomicStryker",
+	"bambam01",
+"bambam01"
   ],
   "logoFile": "assets/dynamiclights/textures/gui/logo.png",
   "dependencies": [
@@ -59,7 +69,9 @@
   "name": "Dynamic Lights Mob Equipment Light Module",
   "description": "Mob Equipment can shiny light. Disable to save a lot of performance.",
   "authors": [
-    "AtomicStryker"
+    "AtomicStryker",
+	"bambam01",
+"bambam01"
   ],
   "logoFile": "assets/dynamiclights/textures/gui/logo.png",
   "dependencies": [
@@ -70,7 +82,9 @@
   "name": "Dynamic Lights Player Light Module",
   "description": "Handheld Items and armor shine light. Disable to save minor performance.",
   "authors": [
-    "AtomicStryker"
+    "AtomicStryker",
+	"bambam01",
+"bambam01"
   ],
   "logoFile": "assets/dynamiclights/textures/gui/logo.png",
   "dependencies": [
@@ -81,7 +95,9 @@
   "name": "Dynamic Lights OtherPlayers Light Module",
   "description": "Other Player's Items shine light. Disable to save some performance.",
   "authors": [
-    "AtomicStryker"
+    "AtomicStryker",
+	"bambam01",
+"bambam01"
   ],
   "logoFile": "assets/dynamiclights/textures/gui/logo.png",
   "dependencies": [
@@ -92,7 +108,9 @@
   "name": "Dynamic Lights Fiery Arrows Light Module",
   "description": "Fire enchanted Arrows shine light. Disable to save minor performance.",
   "authors": [
-    "AtomicStryker"
+    "AtomicStryker",
+	"bambam01",
+"bambam01"
   ],
   "logoFile": "assets/dynamiclights/textures/gui/logo.png",
   "dependencies": [

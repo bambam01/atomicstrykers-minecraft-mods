@@ -20,6 +20,7 @@ import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.TickEvent;
 import cpw.mods.fml.common.gameevent.TickEvent.Phase;
+import org.apache.commons.lang3.ArrayUtils;
 
 /**
  * 
@@ -37,7 +38,10 @@ public class FloodLightSource
     private boolean enabled;
     private boolean simpleMode;
     private Configuration config;
-    
+
+    private int[] disabledDimensions;
+
+
     public FloodLightSource()
     {
         partialLights = new PartialLightSource[5];
@@ -46,7 +50,15 @@ public class FloodLightSource
     @EventHandler
     public void preInit(FMLPreInitializationEvent evt)
     {
-        config = new Configuration(evt.getSuggestedConfigurationFile());        
+        config = new Configuration(evt.getSuggestedConfigurationFile());
+        config.load();
+
+
+        Property disabledDimensionIds = config.get(Configuration.CATEGORY_GENERAL, "disabled dimension ids",new int[] {-100});
+        disabledDimensionIds.comment = "list of dimensions ids that are disabled";
+        disabledDimensions = disabledDimensionIds.getIntList();
+
+        config.save();
         FMLCommonHandler.instance().bus().register(this);
     }
     
@@ -70,7 +82,7 @@ public class FloodLightSource
         if (tick.phase == Phase.END)
         {
             thePlayer = FMLClientHandler.instance().getClient().thePlayer;
-            if (thePlayer != null && thePlayer.isEntityAlive() && !DynamicLights.globalLightsOff())
+            if (thePlayer != null && thePlayer.isEntityAlive() && !DynamicLights.globalLightsOff() && !ArrayUtils.contains(disabledDimensions, thePlayer.dimension))
             {
                 int lightLevel = itemsMap.getLightFromItemStack(thePlayer.getCurrentEquippedItem());
                 
