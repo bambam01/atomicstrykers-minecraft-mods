@@ -134,7 +134,7 @@ public class EntityClassLightSource
             {
                 light = getLightFromEntity(ent);
                 // Loop all loaded Entities, find alive and valid ItemEntities
-                if (light > 0 && ArrayUtils.contains(disabledDimensions, ent.dimension))
+                if (light > 0 && !ArrayUtils.contains(disabledDimensions, ent.dimension))
                 {
                     // now find them in the already tracked item adapters
                     boolean found = false;
